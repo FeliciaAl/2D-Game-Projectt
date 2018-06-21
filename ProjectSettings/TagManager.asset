@@ -8,6 +8,7 @@ TagManager:
   - Collectibles
   - Ground
   - Background
+  - End
   layers:
   - Default
   - TransparentFX
@@ -53,4 +54,10 @@ TagManager:
     locked: 0
   - name: Front
     uniqueID: 3405993979
+    locked: 0
+  - name: Background
+    uniqueID: 2424179539
+    locked: 0
+  - name: End
+    uniqueID: 994677723
     locked: 0

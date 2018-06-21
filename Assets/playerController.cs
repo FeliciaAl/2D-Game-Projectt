@@ -17,6 +17,8 @@ public class playerController : MonoBehaviour
     public Animator charAnimator;
     Rigidbody2D RB;
     public bool grounded = false;
+
+    Vector2 startPos;
 	// Use this for initialization
 	void Start () {
         RB = this.GetComponent<Rigidbody2D>();
@@ -24,6 +26,8 @@ public class playerController : MonoBehaviour
         spriteRender = this.GetComponent<SpriteRenderer>();
         //charAnimator.Play("idle2");
         startPosY = transform.position.y;
+
+        startPos = transform.position;
     }
 
     void checkGrounded()
@@ -108,6 +112,11 @@ public class playerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             print("collectible");
+        }
+
+        else if(collision.gameObject.tag == "End")
+        {
+            transform.position = startPos;
         }
     }
 }
