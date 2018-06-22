@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
-    public float walkSpeed = 0.1f;
-    public float jumpSpeed = 15.0f;
-    public float downSpeed = 1.0f;
+    public float walkSpeed = 1.5f;
+    public float jumpSpeed = 100.0f;
+    public float downSpeed = 0.5f;
     public float jumpMultiplier = 1.5f;
     public float walkMultiplier = 100.0f;
     float timer;
@@ -48,7 +48,7 @@ public class playerController : MonoBehaviour
     {
         if(!grounded)
         {
-            RB.AddForce(Vector2.down * downSpeed, ForceMode2D.Force);
+            RB.AddForce(Vector2.down / 10, ForceMode2D.Force);
         }
     }
 	// Update is called once per frame
@@ -76,14 +76,14 @@ public class playerController : MonoBehaviour
             charAnimator.SetBool("walkTrigger", true);
             float x = Input.GetAxis("Horizontal");
             spriteRender.flipX = false;
-            RB.AddForce((Vector2.right/100 * walkSpeed), ForceMode2D.Impulse);
+            RB.AddForce((Vector2.right * walkSpeed) * Time.deltaTime, ForceMode2D.Impulse);
         }
 
         else if(Input.GetKey(KeyCode.A))
         {
             charAnimator.SetBool("walkTrigger", true);
             spriteRender.flipX = true;
-            RB.AddForce((Vector2.left / 100 * walkSpeed), ForceMode2D.Impulse);
+            RB.AddForce((Vector2.left * walkSpeed) * Time.deltaTime, ForceMode2D.Impulse);
         }
 
         else
@@ -97,7 +97,7 @@ public class playerController : MonoBehaviour
 
     void movePlayer(float horizontalInput)
     {
-        RB.velocity = new Vector2(horizontalInput * walkSpeed, 0);
+        RB.velocity = new Vector2(horizontalInput * walkSpeed * Time.deltaTime, 0);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
